@@ -59,9 +59,9 @@ export const GenreMenu = () => {
     <NavigationMenu>
       <NavigationMenuList className="flex gap-3">
         <NavigationMenuItem className="w-22 ">
-          <NavigationMenuTrigger className="flex w-full h-10  border rounded-2xl border-gray-600 item-center p-1 justify-center gap-2 ">
+          <NavigationMenuTrigger className="flex w-full h-10  border rounded-2xl dark:text-white border-gray-600 item-center p-1 justify-center gap-2 ">
             <ChevronDownIcon
-              className="relative top-[1px]  size-3 transition duration-300 group-data-[state=open]:rotate-180"
+              className="relative top-[1px] dark:fill-white size-3 transition duration-300 group-data-[state=open]:rotate-180"
               aria-hidden="true"
             />
             <p className="dark:text-white">genre</p>
