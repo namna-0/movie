@@ -64,7 +64,7 @@ export const GenreMenu = () => {
               className="relative top-[1px]  size-3 transition duration-300 group-data-[state=open]:rotate-180"
               aria-hidden="true"
             />
-            <p className="">genre</p>
+            <p className="dark:text-white">genre</p>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <NavigationMenuLink className="flex w-100 h-fit  dark:text-black flex-wrap-reverse bg-white p-5 -m-4 gap-2">
