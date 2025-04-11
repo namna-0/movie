@@ -40,14 +40,18 @@ export const MoreLikeMovies = ({ url, id, page, setPage }: MoreLikesProps) => {
         <h1 className=" text-3xl font-bold">more like this</h1>
       </div>
       <div className="grid grid-cols-5 gap-8">
-        {movies.map((movie) => (
-          <MovieCard
-            url={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-            name={movie.title}
-            rating={movie.vote_average}
-            id={movie.id}
-          ></MovieCard>
-        ))}
+        {movies.map((movie, index) => {
+          return (
+            <div key={index}>
+              <MovieCard
+                url={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                name={movie.title}
+                rating={movie.vote_average}
+                id={movie.id}
+              />
+            </div>
+          );
+        })}
       </div>
       <Pages
         totalPages={totalPages}

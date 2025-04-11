@@ -9,7 +9,7 @@ type MovieListProps = {
 };
 export const MovieCard = ({ url, name, rating, id }: MovieListProps) => {
   return (
-    <Link href={`/movie/${id}`} key={id}>
+    <Link href={`/movie/${id}`}>
       <div className="w-9/10 aspect-[1/1.2] flex flex-col">
         <img
           className="w-full h-full rounded-t-lg object-cover"

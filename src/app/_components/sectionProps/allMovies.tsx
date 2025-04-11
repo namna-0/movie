@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { s } from "motion/react-client";
 import Link from "next/link";
 import { Movie, Response } from "./movieSection";
-import { ACCESS_TOKEN } from "@/app/upcoming/page";
 import { MovieCard } from "../movieItems/movieCard";
 import { Pages } from "../movieItems/pages";
 
@@ -15,6 +14,8 @@ export type AllMoviesProps = {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 };
+export const ACCESS_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTliZDYxYzgzZTU3ZWIxNTg5YWM3NjQ0NmNkOTdmMCIsIm5iZiI6MTc0MzE1OTQzMi42ODksInN1YiI6IjY3ZTY4MDg4M2U2NWM4ZWE4OGJhM2YwZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DBhVxhQL39JUnIfTbJeHpK8EpUmovimBXoy76TJZaCI";
 export const AllMovies = ({ title, url, page, setPage }: AllMoviesProps) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);

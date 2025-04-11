@@ -2,7 +2,7 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, Suspense, useEffect, useState } from "react";
 import { NavBar } from "./_components/navirgation/navBar";
 import { GenreProvider } from "./_components/providers/genreProvider";
 import { SearchProvider } from "./_components/providers/searchProvider";
@@ -34,13 +34,15 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className={`${isDark ? "dark" : ""} dark:text-white dark:bg-black`}>
-        <GenreProvider>
-          <SearchProvider>
-            <NavBar setIsDark={setIsDark} isDark={isDark}></NavBar>
-            {children}
-            <Footer />
-          </SearchProvider>
-        </GenreProvider>
+        <Suspense>
+          <GenreProvider>
+            <SearchProvider>
+              <NavBar setIsDark={setIsDark} isDark={isDark}></NavBar>
+              {children}
+              <Footer />
+            </SearchProvider>
+          </GenreProvider>
+        </Suspense>
       </body>
     </html>
   );

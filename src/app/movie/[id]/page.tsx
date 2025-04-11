@@ -1,7 +1,7 @@
 "use client";
+import { ACCESS_TOKEN } from "@/app/_components/sectionProps/allMovies";
 import { MovieSection } from "@/app/_components/sectionProps/movieSection";
 import { star } from "@/app/_components/svgs/vectors";
-import { ACCESS_TOKEN } from "@/app/upcoming/page";
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";

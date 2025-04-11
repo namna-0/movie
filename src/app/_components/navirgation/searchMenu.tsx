@@ -18,7 +18,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Loading } from "../svgs/loading";
 import { Button } from "@/components/ui/button";
-import { ACCESS_TOKEN } from "@/app/upcoming/page";
+import { ACCESS_TOKEN } from "../sectionProps/allMovies";
+
 
 export type Movie = {
   adult: boolean;
@@ -114,7 +115,10 @@ export const SearchMenu = () => {
                             </div>
                           ))}
                           <Link href="/search">
-                            <Button>see all results for "{search}"</Button>
+                            <Button>
+                              see all results for
+                              {search}
+                            </Button>
                           </Link>
                         </div>
                       )}

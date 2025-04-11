@@ -9,9 +9,8 @@ import {
   useState,
 } from "react";
 import axios, { Axios } from "axios";
-
 import { Movie } from "../sectionProps/movieSection";
-import { ACCESS_TOKEN } from "@/app/upcoming/page";
+import { ACCESS_TOKEN } from "../sectionProps/allMovies";
 
 export const SearchContext = createContext({});
 type SearchParams = {

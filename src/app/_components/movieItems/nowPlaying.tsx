@@ -13,8 +13,8 @@ import {
   star,
 } from "../svgs/vectors";
 import { Movie, Response } from "../sectionProps/movieSection";
-import { ACCESS_TOKEN } from "../../upcoming/page";
 import { Button } from "@/components/ui/button";
+import { ACCESS_TOKEN } from "../sectionProps/allMovies";
 
 type MovieSectionProps = {
   title: string;

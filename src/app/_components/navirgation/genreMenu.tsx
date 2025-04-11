@@ -13,8 +13,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ACCESS_TOKEN } from "@/app/upcoming/page";
 import { Badge } from "@/components/ui/badge";
+import { ACCESS_TOKEN } from "../sectionProps/allMovies";
 
 export type Genre = { id: number; name: string };
 export type GenresRes = {
