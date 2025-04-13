@@ -14,7 +14,6 @@ import axios from "axios";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
-import { ACCESS_TOKEN } from "../sectionProps/allMovies";
 
 export type Genre = { id: number; name: string };
 export type GenresRes = {
@@ -35,7 +34,7 @@ export const GenreMenu = () => {
         `https://api.themoviedb.org/3/genre/movie/list?language=en-US`,
         {
           headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
           },
         }
       );

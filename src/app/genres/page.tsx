@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Genre, useGenres } from "../_components/providers/genreProvider";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ACCESS_TOKEN } from "../_components/sectionProps/allMovies";
 import { Movie } from "../_components/sectionProps/movieSection";
 import { GenresRes } from "../_components/navirgation/genreMenu";
 

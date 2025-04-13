@@ -19,8 +19,6 @@ export type Movie = {
   overview: string;
   vote_average: number;
 };
-export const ACCESS_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTliZDYxYzgzZTU3ZWIxNTg5YWM3NjQ0NmNkOTdmMCIsIm5iZiI6MTc0MzE1OTQzMi42ODksInN1YiI6IjY3ZTY4MDg4M2U2NWM4ZWE4OGJhM2YwZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DBhVxhQL39JUnIfTbJeHpK8EpUmovimBXoy76TJZaCI";
 
 export type Response = {
   results: Movie[];
@@ -40,7 +38,7 @@ export const MovieSection = ({ url, title, path }: MovieSectionProps) => {
     const getMoviesByAxios = async () => {
       const { data } = await axios.get<Response>(url, {
         headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
         },
       });
       setMovies(data.results);

@@ -14,7 +14,6 @@ import {
 } from "../svgs/vectors";
 import { Movie, Response } from "../sectionProps/movieSection";
 import { Button } from "@/components/ui/button";
-import { ACCESS_TOKEN } from "../sectionProps/allMovies";
 
 type MovieSectionProps = {
   title: string;
@@ -29,7 +28,7 @@ export const NowPlaying = ({ title }: MovieSectionProps): JSX.Element => {
         "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1 ",
         {
           headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
           },
         }
       );

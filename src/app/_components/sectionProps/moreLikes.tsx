@@ -1,11 +1,11 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ACCESS_TOKEN, Movie, Response } from "./movieSection";
 import Link from "next/link";
 import { star } from "../svgs/vectors";
 import { Pages } from "../movieItems/pages";
 import { MovieCard } from "../movieItems/movieCard";
+import { Movie, Response } from "./movieSection";
 
 export type MoreLikesProps = {
   id: string;
@@ -21,7 +21,7 @@ export const MoreLikeMovies = ({ url, id, page, setPage }: MoreLikesProps) => {
     const getMoviesByAxios = async () => {
       const { data } = await axios.get<Response>(url, {
         headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
         },
       });
       setMovies(data.results);

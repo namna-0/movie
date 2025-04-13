@@ -8,7 +8,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { ACCESS_TOKEN } from "../sectionProps/movieSection";
 export const GenreContext = createContext({});
 export type Genre = { id: number; name: string };
 export type GenresRes = {
@@ -22,7 +21,7 @@ export const GenreProvider = ({ children }: PropsWithChildren) => {
         `https://api.themoviedb.org/3/genre/movie/list?language=en-US`,
         {
           headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
           },
         }
       );

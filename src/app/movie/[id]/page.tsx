@@ -1,5 +1,4 @@
 "use client";
-import { ACCESS_TOKEN } from "@/app/_components/sectionProps/allMovies";
 import { MovieSection } from "@/app/_components/sectionProps/movieSection";
 import { star } from "@/app/_components/svgs/vectors";
 import axios from "axios";
@@ -39,7 +38,7 @@ const MoviePage = () => {
         `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
         {
           headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
           },
         }
       );

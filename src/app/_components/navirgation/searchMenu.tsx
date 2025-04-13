@@ -18,8 +18,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Loading } from "../svgs/loading";
 import { Button } from "@/components/ui/button";
-import { ACCESS_TOKEN } from "../sectionProps/allMovies";
-
 
 export type Movie = {
   adult: boolean;
@@ -52,7 +50,7 @@ export const SearchMenu = () => {
         `https://api.themoviedb.org/3/search/movie?query=${search}&language=en-US&page=${page}`,
         {
           headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
           },
         }
       );

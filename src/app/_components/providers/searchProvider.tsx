@@ -10,7 +10,6 @@ import {
 } from "react";
 import axios, { Axios } from "axios";
 import { Movie } from "../sectionProps/movieSection";
-import { ACCESS_TOKEN } from "../sectionProps/allMovies";
 
 export const SearchContext = createContext({});
 type SearchParams = {
@@ -27,7 +26,7 @@ export const SearchProvider = ({ children }: PropsWithChildren) => {
         `https://api.themoviedb.org/3/search/movie?query=${search}&page=${page}&language=en-US`,
         {
           headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
           },
         }
       );
