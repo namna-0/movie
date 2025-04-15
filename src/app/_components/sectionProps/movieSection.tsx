@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MovieCard } from "../movieItems/movieCard";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export type Movie = {
   adult: boolean;
@@ -23,6 +24,7 @@ export type Movie = {
 export type Response = {
   results: Movie[];
   total_pages?: number;
+  total_results?: number;
 };
 export type MovieSectionProps = {
   url: string;
@@ -33,15 +35,17 @@ export type MovieSectionProps = {
 export const MovieSection = ({ url, title, path }: MovieSectionProps) => {
   const router = useRouter();
   const [movies, setMovies] = useState<Movie[]>([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const getMoviesByAxios = async () => {
+      setLoading(true);
       const { data } = await axios.get<Response>(url, {
         headers: {
           Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
         },
       });
       setMovies(data.results);
+      setLoading(false);
     };
     getMoviesByAxios();
   }, [url]);
@@ -59,18 +63,26 @@ export const MovieSection = ({ url, title, path }: MovieSectionProps) => {
         </Link>
       </div>
       <div className="grid grid-cols-5 gap-8">
-        {movies.slice(0, 10).map((movie, index) => {
-          return (
+        {loading &&
+          new Array(20).fill(0).map((_, index) => (
             <div key={index}>
-              <MovieCard
-                url={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                name={movie.title}
-                id={movie.id}
-                rating={movie.vote_average}
-              ></MovieCard>
+              <Skeleton className="w-full h-[200px]" />
+              <Skeleton className="mt-2" />
             </div>
-          );
-        })}
+          ))}
+        {!loading &&
+          movies.slice(0, 10).map((movie) => {
+            return (
+              <div key={movie.id}>
+                <MovieCard
+                  url={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                  id={movie.id}
+                  name={movie.title}
+                  rating={movie.vote_average}
+                ></MovieCard>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

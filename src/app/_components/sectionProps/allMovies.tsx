@@ -2,25 +2,39 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { s } from "motion/react-client";
 import Link from "next/link";
 import { Movie, Response } from "./movieSection";
 import { MovieCard } from "../movieItems/movieCard";
 import { Pages } from "../movieItems/pages";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useParams, useSearchParams } from "next/navigation";
+import { Params } from "@/app/similar/[id]/page";
 
 export type AllMoviesProps = {
   url: string;
   title: string;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  className: string;
 };
-export const AllMovies = ({ title, url, page, setPage }: AllMoviesProps) => {
+export const AllMovies = ({
+  title,
+  url,
+  page,
+  setPage,
+  className,
+}: AllMoviesProps) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [length, setLength] = useState<number[]>([0]);
-
+  const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const genre = searchParams.get("genre");
+  const [totalResults, setTotalResults] = useState<number>(1);
+  const { id } = useParams<Params>();
   useEffect(() => {
     const getMoviesByAxios = async () => {
+      setLoading(true);
       const { data } = await axios.get<Response>(url, {
         headers: {
           Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
@@ -33,28 +47,42 @@ export const AllMovies = ({ title, url, page, setPage }: AllMoviesProps) => {
       } else {
         setTotalPages(data.total_pages ?? 0);
       }
+      if ((data.total_results ?? 0) >= 1000) {
+        setTotalResults(1000);
+      } else {
+        setTotalResults(data.total_results ?? 0);
+      }
+      setLoading(false);
     };
     getMoviesByAxios();
-  }, [page, url]);
+  }, [id, genre, page, url]);
 
   return (
-    <div className="flex flex-col w-screen px-20 gap-8 mb-19">
+    <div className={className}>
       <div className="flex justify-between items-center mb-4">
         <h1 className=" text-3xl font-bold">{title}</h1>
       </div>
-      <div className="grid grid-cols-5 gap-8">
-        {movies.map((movie, index) => {
-          return (
+      <div className="flex-1 grid grid-cols-5 gap-8">
+        {loading &&
+          new Array(20).fill(0).map((_, index) => (
             <div key={index}>
-              <MovieCard
-                url={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                name={movie.title}
-                id={movie.id}
-                rating={movie.vote_average}
-              ></MovieCard>
+              <Skeleton className="w-full h-[200px]" />
+              <Skeleton className="mt-2" />
             </div>
-          );
-        })}
+          ))}
+        {!loading &&
+          movies.map((movie) => {
+            return (
+              <div key={movie.id}>
+                <MovieCard
+                  url={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                  id={movie.id}
+                  name={movie.title}
+                  rating={movie.vote_average}
+                ></MovieCard>
+              </div>
+            );
+          })}
       </div>
       <Pages
         totalPages={totalPages}

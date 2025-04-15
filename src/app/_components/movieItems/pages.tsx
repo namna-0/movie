@@ -31,7 +31,6 @@ export const Pages = ({
       setPage(page - 1);
     }
   };
-
   const handleNext = () => {
     if (page < totalPages) setPage(page + 1);
   };
@@ -54,7 +53,7 @@ export const Pages = ({
     }
   }, [page, totalPages]);
   return (
-    <Pagination>
+    <Pagination className="w-fit ">
       <PaginationContent>
         {page > 0 && (
           <PaginationItem>

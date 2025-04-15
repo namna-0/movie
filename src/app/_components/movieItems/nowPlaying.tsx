@@ -95,7 +95,7 @@ export const NowPlaying = ({ title }: MovieSectionProps): JSX.Element => {
                       <p className="text-gray-400">/10</p>
                     </div>
                   </div>
-                  <div className=" flex w-fit h-fit place-self-start text-xs">
+                  <div className=" flex items-start  text-xs">
                     {movie.overview}
                   </div>
                   <Button className="flex flex-row bg-white w-fit px-3 h-10 rounded-md hover:bg-gray-400 text-black gap-2  items-center justify-end ">

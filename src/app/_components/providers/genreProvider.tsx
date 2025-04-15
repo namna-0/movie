@@ -1,14 +1,13 @@
 "use client";
 import axios from "axios";
 import {
-  Children,
   createContext,
   PropsWithChildren,
   useContext,
   useEffect,
   useState,
 } from "react";
-export const GenreContext = createContext({});
+export const GenreContext = createContext<GenresRes>({ genres:[] });
 export type Genre = { id: number; name: string };
 export type GenresRes = {
   genres: Genre[];

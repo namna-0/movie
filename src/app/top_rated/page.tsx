@@ -8,6 +8,7 @@ export default function Home() {
 
   return (
     <AllMovies
+      className="flex flex-col px-20 gap-8 mb-19"
       page={page}
       setPage={setPage}
       url={`https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`}

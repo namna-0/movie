@@ -9,14 +9,14 @@ type MovieListProps = {
 };
 export const MovieCard = ({ url, name, rating, id }: MovieListProps) => {
   return (
-    <Link href={`/movie/${id}`}>
+    <Link href={`/movie/${id}`} key={id}>
       <div className="w-9/10 aspect-[1/1.2] flex flex-col">
         <img
           className="w-full h-full rounded-t-lg object-cover"
           src={url}
           alt="Image"
         />
-        <div className="flex flex-col h-[33%] dark:bg-[#27272A] bg-[#f1f1f8] rounded-b-lg p-[2%]">
+        <div className="flex flex-col min-h-[33%] dark:bg-[#27272A] bg-[#f1f1f8] rounded-b-lg p-[2%]">
           <div className="flex flex-row text-wrap items-center gap-[2%]">
             {star}
             <p className="text-[85%]">

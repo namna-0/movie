@@ -7,6 +7,7 @@ export default function Home() {
   const [page, setPage] = useState<number>(1);
   return (
     <AllMovies
+      className="flex flex-col px-20 gap-8 mb-19"
       page={page}
       setPage={setPage}
       url={`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`}

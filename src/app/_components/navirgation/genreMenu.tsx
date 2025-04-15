@@ -8,12 +8,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "./navigation-menu";
-import { ChevronRightIcon, searchIcon } from "../svgs/vectors";
+import { ChevronRightIcon, removeIcon, searchIcon } from "../svgs/vectors";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
+import { useGenres } from "../providers/genreProvider";
 
 export type Genre = { id: number; name: string };
 export type GenresRes = {
@@ -21,28 +22,12 @@ export type GenresRes = {
 };
 
 export const GenreMenu = () => {
-  const [genres, setGenres] = useState<Genre[]>([]);
   const router = useRouter();
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
   const [IsSelect, setIsSelect] = useState<boolean>(false);
   const searchParams = useSearchParams();
+  const { genres } = useGenres();
   const genre = searchParams.get("genre");
-
-  useEffect(() => {
-    const getGenres = async () => {
-      const { data } = await axios.get<GenresRes>(
-        `https://api.themoviedb.org/3/genre/movie/list?language=en-US`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-          },
-        }
-      );
-      setGenres(data.genres);
-    };
-
-    getGenres();
-  }, []);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -73,13 +58,14 @@ export const GenreMenu = () => {
               </div>
               <div className="flex flex-wrap gap-4">
                 {genres.map(({ id, name }) => (
-                  <Link key={id} href={`/search?genre=${id}`}>
+                  <Link key={id} href={`/genres?genre=${id}`}>
                     <Badge
                       variant={genre === id.toString() ? "default" : "outline"}
                       className="flex items-center gap-2"
                     >
                       {name}
-                      {ChevronRightIcon}
+                      {!(genre == id.toString()) && ChevronRightIcon}
+                      {genre == id.toString() && removeIcon}
                     </Badge>
                   </Link>
                 ))}
