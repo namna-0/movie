@@ -42,14 +42,20 @@ export const Pages = ({
     if (page == 1 || page == 2) {
       setLength([2, 3]);
     }
+    if (page == 3) {
+      setLength([2, 3, 4]);
+    }
     if (page >= 3) {
-      setLength([page, page + 1]);
+      setLength([page - 1, page, page + 1]);
     }
     if (page >= totalPages - 2) {
+      setLength([totalPages - 3, totalPages - 2, totalPages - 1]);
+    }
+    if (page == totalPages - 1) {
       setLength([totalPages - 2, totalPages - 1]);
     }
     if (page == totalPages) {
-      setLength([totalPages - 2, totalPages - 1]);
+      setLength([totalPages - 1]);
     }
   }, [page, totalPages]);
   return (
@@ -69,12 +75,12 @@ export const Pages = ({
             1
           </PaginationLink>
         </PaginationItem>
-        {page > 2 && (
+        {page > 3 && (
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>
         )}
-        {length.slice(0, 2).map((item) => (
+        {length.slice(0, 3).map((item) => (
           <PaginationItem
             className={`${
               page == item ? "border-solid rounded-sm border" : ""

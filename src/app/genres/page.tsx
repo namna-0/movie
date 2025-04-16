@@ -18,39 +18,42 @@ const GenrePage = () => {
   const { genres } = useGenres();
   const [page, setPage] = useState<number>(1);
   return (
-    <div className="flex gap-4 py-12 px-20">
-      <div className="w-[388px] flex flex-col gap-5">
-        <div>
-          <h1 className="text-2xl font-semibold">Genres</h1>
-          <p>See lists of movies by genre</p>
+    <div className="flex py-12 px-20 flex-col gap-9">
+      <h1 className="text-2xl capitalize font-bold">search filter</h1>
+      <div className="flex flex-row w-full">
+        <div className="w-[388px] flex flex-col gap-5">
+          <div>
+            <h1 className="text-2xl font-semibold">Genres</h1>
+            <p>See lists of movies by genre</p>
+          </div>
+          <div className="flex w-full flex-wrap flex-row gap-4">
+            {genres.map(({ id, name }) => (
+              <Link key={id} href={`/genres?genre=${id}`}>
+                <Badge
+                  variant={genre === id.toString() ? "default" : "outline"}
+                  className="flex items-center gap-2"
+                >
+                  {name}
+                  {!(genre == id.toString()) && ChevronRightIcon}
+                  {genre == id.toString() && removeIcon}
+                </Badge>
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="flex w-full flex-wrap gap-4">
-          {genres.map(({ id, name }) => (
-            <Link key={id} href={`/genres?genre=${id}`}>
-              <Badge
-                variant={genre === id.toString() ? "default" : "outline"}
-                className="flex items-center gap-2"
-              >
-                {name}
-                {!(genre == id.toString()) && ChevronRightIcon}
-                {genre == id.toString() && removeIcon}
-              </Badge>
-            </Link>
-          ))}
+        <div className="w-[1px] bg-slate-300 mx-4" />
+        <div className="w-full">
+          <AllMovies
+            className=""
+            title={`20 result in '${
+              genres.find((g) => g.id.toString() === genre)?.name ||
+              "selected genre"
+            }'`}
+            page={page}
+            setPage={setPage}
+            url={`https://api.themoviedb.org/3/discover/movie?language=en-US&with_genres=${genre}&page=${page}`}
+          ></AllMovies>
         </div>
-      </div>
-      <div className="w-[1px] bg-slate-300 mx-4" />
-      <div>
-        <AllMovies
-        className=""
-          title={`20 result in '${
-            genres.find((g) => g.id.toString() === genre)?.name ||
-            "selected genre"
-          }'`}
-          page={page}
-          setPage={setPage}
-          url={`https://api.themoviedb.org/3/discover/movie?language=en-US&with_genres=${genre}&page=${page}`}
-        ></AllMovies>
       </div>
     </div>
   );

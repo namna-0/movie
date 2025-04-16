@@ -5,7 +5,6 @@ import { AllMovies } from "../_components/sectionProps/allMovies";
 
 export default function Home() {
   const [page, setPage] = useState<number>(1);
-
   return (
     <AllMovies
       className="flex flex-col px-20 gap-8 mb-19"
