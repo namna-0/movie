@@ -63,14 +63,22 @@ export const MovieSection = ({ url, title, path }: MovieSectionProps) => {
         </Link>
       </div>
       <div className="grid grid-cols-5 gap-8">
-        {loading &&
-          new Array(20).fill(0).map((_, index) => (
-            <div key={index}>
-              <Skeleton className="w-full h-[200px]" />
-              <Skeleton className="mt-2" />
+        {loading == true &&
+          new Array(10).fill(0).map((_, index) => (
+            <div className="mx-auto w-full max-w-sm rounded-md animate-pulse">
+              <div className="w-9/10 aspect-[1/1.2] flex flex-col">
+                <div className="w-full h-full rounded-t-lg object-cover bg-[#f1f1f8]"></div>
+                <div className="flex flex-col min-h-[33%] dark:bg-[#27272A] bg-[#f1f1f8] rounded-b-lg p-[2%]">
+                  <div className="flex flex-row text-wrap items-center gap-[2%]"></div>
+                  <div className="text-wrap overflow-hidden">
+                    <p className="text-[85%]"></p>
+                    {/* `text-[1em]`-ийг `text-base` гэж ашиглах боломжтой */}
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
-        {!loading &&
+        {!(loading == true) &&
           movies.slice(0, 10).map((movie) => {
             return (
               <div key={movie.id}>
